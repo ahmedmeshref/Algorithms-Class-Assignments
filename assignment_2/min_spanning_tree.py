@@ -11,11 +11,12 @@ def costMinSpanningTree(graph, startingVertex):
     # Seen contains indices of all seen vertices
     seen = set()
     while len(minSpanningTree) < V - 1:
+        # Add vertex to seen vertices
         seen.add(currVertex)
-        minimumCostEdge = [0, 0, sys.maxsize]
-        # Get all valid vertices from the currVertex
+        minimumCostEdge = [None, None, sys.maxsize]
+        # Get all valid edges from the currVertex
         for vertex2 in range(V):
-            # if there is an edge
+            # if there is an edge and vertex was not seen before, add it edge in the list of valid edges
             if graph[currVertex][vertex2] != 0 and vertex2 not in seen:
                 validEdges.append([currVertex, vertex2, graph[currVertex][vertex2]])
 
@@ -34,11 +35,6 @@ def costMinSpanningTree(graph, startingVertex):
     return minSpanningTree
 
 
-# g = [[0, 19, 5, 0, 0],
-#      [19, 0, 5, 9, 2],
-#      [5, 5, 0, 1, 6],
-#      [0, 9, 1, 0, 1],
-#      [0, 2, 6, 1, 0]]
 g1 = [[0, 28, 0, 0, 0, 10, 0],
       [28, 0, 16, 0, 0, 0, 14],
       [0, 16, 0, 12, 0, 0, 0],
