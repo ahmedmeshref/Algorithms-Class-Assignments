@@ -7,6 +7,7 @@ def costMinSpanningTree(graph, startingVertex):
     # Number of vertices in graph
     V = len(graph)
     minSpanningTree = []
+    totalCost = 0
     validEdges = []
     # Seen contains indices of all seen vertices
     seen = set()
@@ -27,12 +28,13 @@ def costMinSpanningTree(graph, startingVertex):
 
         # Add edge to minSpanningTree
         minSpanningTree.append([minimumCostEdge[0] + 1, minimumCostEdge[1] + 1, minimumCostEdge[2]])
+        totalCost += minimumCostEdge[2]
         # Remove edge from list of all valid edges
         validEdges.remove(minimumCostEdge)
         # Update curr vertex
         currVertex = minimumCostEdge[1]
 
-    return minSpanningTree
+    return minSpanningTree, totalCost
 
 
 g1 = [[0, 28, 0, 0, 0, 10, 0],
@@ -42,4 +44,6 @@ g1 = [[0, 28, 0, 0, 0, 10, 0],
       [0, 0, 0, 22, 0, 25, 24],
       [10, 0, 0, 0, 25, 0, 0],
       [0, 14, 0, 18, 24, 0, 0]]
-print(costMinSpanningTree(g1, 6))
+MST, minCost = costMinSpanningTree(g1, 6)
+print(MST)
+print("Min Cost =", minCost)
