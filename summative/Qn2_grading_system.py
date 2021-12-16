@@ -25,5 +25,15 @@ def roundGrades(grades: list[int]) -> list[int]:
     return [roundGrade(grade) for grade in grades]
 
 
-original_grades = [101, 84, 29, 57]
-print(roundGrades(original_grades))
+if __name__ == "__main__":
+    originalGrades = [-100, 84, 29, 57, 71]
+    roundedGrades = roundGrades(originalGrades)
+    for ind in range(0, len(roundedGrades)):
+        # Invalid grade
+        if roundedGrades[ind] == -1:
+            print(f"Student {ind + 1} received {originalGrades[ind]}, grade is invalid!")
+        elif roundedGrades[ind] == originalGrades[ind]:
+            print(f"Student {ind + 1} received {originalGrades[ind]}, grade will not be modified and the "
+                  f"student's final grade is {roundedGrades[ind]}")
+        else:
+            print(f"Student {ind + 1} received {originalGrades[ind]}, the student's final grade is rounded to {roundedGrades[ind]}")

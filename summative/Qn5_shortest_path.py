@@ -18,11 +18,13 @@ def createAdjList(edges: list[list[int]]) -> dict[list[int]]:
 
 def shortestPath(n: int, edges: list[list[int]], startNode: int) -> list[int]:
     """
-    shortestPath returns a list of min distance between startNode and all other nodes in giving graph
+    shortestPath returns a list of min distance between startNode and all other nodes in giving graph. -1 in the output
+        means no edge, and 0 means the starting node.
     TIME COMPLEXITY: O(E*log(V)) -> E is number of edges and V is the number of vertices. We loop over all the edges (E)
         and we use min heap as a priority queue to get the minimum distance vertex which costs O(LogV).
     SPACE COMPLEXITY: O(E + V) -> E is number of edges and V is the number of vertices for creating an adjacency list.
     """
+    # Create adj List view from the given edges
     graph = createAdjList(edges)
     weights = [sys.maxsize] * (n + 1)
     # Set the final weight of the start vertex to 0
@@ -53,9 +55,13 @@ def shortestPath(n: int, edges: list[list[int]], startNode: int) -> list[int]:
     return [-1 if weight == sys.maxsize else weight for weight in weights[1:]]
 
 
-n = 5
-graph = [[1, 2, 5], [1, 3, 15], [2, 3, 6], [3, 4, 2]]
-s = 1
-shortestPathWeights = shortestPath(n, graph, s)
-for ind in range(len(shortestPathWeights)):
-    print(f"Min weight from {1} to {ind + 1} = {shortestPathWeights[ind]}")
+if __name__ == "__main__":
+    n = 5
+    graph = [[1, 2, 5], [1, 3, 15], [2, 3, 6], [3, 4, 2]]
+    s = 1
+    shortestPathWeights = shortestPath(n, graph, s)
+    # Loop over the obtained output and print it in the required format
+    for ind in range(len(shortestPathWeights)):
+        if ind + 1 == s:
+            continue
+        print(f"{s}/S -> {ind + 1} - Shortest Path Value : {shortestPathWeights[ind]}")
